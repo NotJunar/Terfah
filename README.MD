@@ -1,7 +1,7 @@
 # Terfah - A Hobbyist Python-Based Programming Language
 
 ```
-(ReadME is AI generated based on my code due to my laziness. I have proof-readed this but as all AI models are based on Transformer, which predicts the text and treat logical data like any novel, it may make up something, if something it said does not work. Please make a pull request. I will adjust the README.)
+Note From NotJunar: ReadME is AI generated based on my code due to my laziness. I have proof-readed this but as all AI models are based on Transformer, which predicts the text and treat logical data like any novel, it may make up features and syntaxs that in reality does not exist, if something the README includes does not work. Please make a pull request. I will adjust the README accordingly!
 ```
 
 **Terfah** is a lightweight and flexible programming language inspired by Python, designed for hobbyists and learners interested in experimenting with a minimalist coding environment. With support for interactive execution in a REPL (Read-Eval-Print Loop) and the ability to run script files, Terfah provides an easy-to-use platform for understanding core programming concepts, testing code snippets, and more.
