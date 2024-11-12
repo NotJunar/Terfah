@@ -1,0 +1,7 @@
+
+out "Enter temperature in Celsius:"
+%celsius% = input()
+%celsius% = eval_expression %celsius%
+
+%fahrenheit% = (%celsius% * 9/5) + 32
+out "%celsius% degrees Celsius is equal to %fahrenheit% degrees Fahrenheit."

@@ -1,0 +1,45 @@
+# This script demonstrates basic Terfah functionality
+
+out "Welcome to Terfah!"
+
+# Assigning values to variables
+%num1% = 10
+%num2% = 20
+
+# A simple calculation
+%result% = %num1% + %num2%
+out "The result of num1 + num2 is: " %result%
+
+# Conditional statement
+if %result% > 15
+    out "Result is greater than 15!"
+else
+    out "Result is not greater than 15"
+done
+
+# Function definition
+fn greet_user
+    out "Hello, Terfah user!"
+done
+
+# Calling the function
+greet_user
+
+# More complex calculation
+%value% = 5 * 3 + (%num1% * 2)
+out "The value after complex calculation is: " %value%
+
+# Another conditional check
+if %value% < 50
+    out "Value is less than 50!"
+else
+    out "Value is greater than or equal to 50"
+done
+
+# A loop example (note: simple for-loop logic)
+out "Starting loop..."
+for %i% = 1 to 5
+    out "Current iteration: " %i%
+done
+
+out "Script completed!"

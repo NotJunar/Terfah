@@ -1,0 +1,4 @@
+# Modify the content of a file (Still trying to make this work)
+
+content:modify "Hello, this is the new content!" "example.txt"
+out "The content of 'example.txt' has been modified."

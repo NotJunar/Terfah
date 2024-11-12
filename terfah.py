@@ -34,12 +34,14 @@ def execute(code):
     while i < len(code):
         line = code[i].strip()
 
-        if not line:  # Skip empty lines
+        if not line:  
             i += 1
             continue
 
         try:
-            # Handle output
+
+            line = replace_variables(line)
+
             if line.startswith("out"):
                 statement = line[4:].strip()
                 if statement in variables:
@@ -47,18 +49,15 @@ def execute(code):
                 else:
                     out(eval_expression(statement))
 
-            # Handle input
             elif line.endswith("= input"):
                 var_name = line.split("=")[0].strip()
                 user_input = input()
                 variables[var_name] = eval_expression(user_input)
 
-            # Handle variable assignment
             elif "=" in line:
                 var_name, expression = map(str.strip, line.split("=", 1))
                 variables[var_name] = eval_expression(expression)
 
-            # Handle conditional statements
             elif line.startswith("if"):
                 condition = line[3:].strip()
                 if eval_expression(condition):
@@ -68,7 +67,6 @@ def execute(code):
                         execute([inner_line])
                         i += 1
 
-            # Handle elif statements
             elif line.startswith("elif"):
                 condition = line[5:].strip()
                 if eval_expression(condition):
@@ -78,7 +76,6 @@ def execute(code):
                         execute([inner_line])
                         i += 1
 
-            # Handle function definitions
             elif line.startswith("fn"):
                 fn_name = line.split()[1]
                 fn_body = []
@@ -86,21 +83,40 @@ def execute(code):
                 while i < len(code) and code[i].strip() != "done":
                     fn_body.append(code[i])
                     i += 1
-                functions[fn_name] = fn_body  # Store the function body for later execution
+                functions[fn_name] = fn_body  
 
-            # Handle function calls with parameters
             elif line.split()[0] in functions:
                 parts = line.split()
                 fn_name = parts[0]
                 args = parts[1:]
                 fn_body = functions[fn_name]
 
-                # Assign function arguments to variables
                 for index, arg in enumerate(args):
                     variables[f"arg{index + 1}"] = eval_expression(arg)
 
-                # Execute the function body
                 execute(fn_body)
+
+            elif line.startswith("content:modify"):
+                parts = line.split()
+                action = parts[1]
+                filename = parts[-1]
+                content = " ".join(parts[2:-1])  
+                handle_content_modify(action, content, filename)
+
+            elif line.startswith("content:replace"):
+                parts = line.split()
+                old_content = parts[1]
+                new_content = parts[2]
+                filename = parts[3]
+                handle_content_replace(old_content, new_content, filename)
+
+            elif line.startswith("content:delete"):
+                filename = line.split()[1]
+                handle_content_delete(filename)
+
+            elif line.startswith("content:"):
+                function_name = line.split(":")[1].strip()
+                handle_content_function(function_name)
 
         except Exception as e:
             generate_crash_report(e, code)
@@ -111,20 +127,55 @@ def execute(code):
 
 def eval_expression(expression):
     try:
-        # Check if it's a boolean value
+
         if expression.lower() == "yes":
             return True
         elif expression.lower() == "no":
             return False
 
-        # Check if it's a variable
         if expression in variables:
             return variables[expression]
 
-        # Try to evaluate as number or expression
         return eval(expression)
     except:
         return expression.strip('"')
+
+def replace_variables(line):
+    """Replace all variables in the line with their values."""
+    while "%" in line:
+        start = line.find("%") + 1
+        end = line.find("%", start)
+        if start > 0 and end > start:
+            var_name = line[start:end]
+            if var_name in variables:
+                line = line[:start-1] + str(variables[var_name]) + line[end+1:]
+            else:
+                line = line[:start-1] + "" + line[end+1:]
+        else:
+            break
+    return line
+
+def handle_content_modify(action, content, filename):
+    if action == "modify":
+        write_file(filename, content)
+        out(f"File '{filename}' modified with new content.")
+
+def handle_content_replace(old_content, new_content, filename):
+    file_content = read_file(filename)
+    modified_content = file_content.replace(old_content, new_content)
+    write_file(filename, modified_content)
+    out(f"Replaced '{old_content}' with '{new_content}' in '{filename}'.")
+
+def handle_content_delete(filename):
+    try:
+        os.remove(filename)
+        out(f"File '{filename}' deleted.")
+    except FileNotFoundError:
+        out(f"Error: File '{filename}' not found.")
+
+def handle_content_function(function_name):
+
+    out(f"Executing content-related function: {function_name}")
 
 def run_file(filename):
     code = read_file(filename)
@@ -150,9 +201,8 @@ def generate_crash_report(error, code):
     crash_info += "Code Snippet that caused the error:\n"
     crash_info += "\n".join(code) + "\n\n"
     crash_info += "Advanced Analysis:\n"
-    crash_info += traceback.format_exc()  # Get more detailed traceback for debugging
-    
-    # Write the crash report to a file
+    crash_info += traceback.format_exc()  
+
     with open(filename, 'w') as file:
         file.write(crash_info)
 
