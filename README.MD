@@ -270,5 +270,6 @@ Terfah is released under the **MIT License**. See [LICENSE](LICENSE) for more de
 ---
 
 Thank you for using Terfah! We hope it helps you in your programming journey. Whether you're learning, experimenting, or creating, Terfah is here to make coding fun and accessible.
+
 [![Star History Chart](https://api.star-history.com/svg?repos=notjunar/terfah&type=Date)](https://star-history.com/#notjunar/terfah&Date)
 
