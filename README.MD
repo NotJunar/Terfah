@@ -1,10 +1,10 @@
-# Terfah - A Hobbyist Python-Based Programming Language
+# Terfah - Self-Made Interpreter Language
 
 ```
 Note From NotJunar: ReadME is AI generated based on my code due to my laziness. I have proof-readed this but as all AI models are based on Transformer, which predicts the text and treat logical data like any novel, it may make up features and syntaxs that in reality does not exist, if something the README includes does not work. Please make a pull request. I will adjust the README accordingly!
 ```
 
-**Terfah** is a lightweight and flexible programming language inspired by Python, designed for hobbyists and learners interested in experimenting with a minimalist coding environment. With support for interactive execution in a REPL (Read-Eval-Print Loop) and the ability to run script files, Terfah provides an easy-to-use platform for understanding core programming concepts, testing code snippets, and more.
+**Terfah** is a lightweight programming language built on Python by NotJunar. It supports script executation and REPL mode.
 
 This README serves as a comprehensive guide for getting started with Terfah, covering installation, usage, syntax, error handling, and practical examples.
 
@@ -30,7 +30,7 @@ This README serves as a comprehensive guide for getting started with Terfah, cov
 
 ## 1. Introduction
 
-Terfah is a programming language built specifically for hobbyists, learners, and anyone interested in experimenting with simple coding constructs. Its design focuses on simplicity, making it ideal for testing small programs or learning how basic programming concepts like variables, functions, and conditionals work in practice. Terfah is Python-based and supports both interactive and script modes.
+Terfah is a programming language built by NotJunar. Terfah is Python-based and supports both interactive and script modes.
 
 ### Key Features:
 - **REPL Mode**: Interactively test code line-by-line.
@@ -270,3 +270,5 @@ Terfah is released under the **MIT License**. See [LICENSE](LICENSE) for more de
 ---
 
 Thank you for using Terfah! We hope it helps you in your programming journey. Whether you're learning, experimenting, or creating, Terfah is here to make coding fun and accessible.
+[![Star History Chart](https://api.star-history.com/svg?repos=notjunar/terfah&type=Date)](https://star-history.com/#notjunar/terfah&Date)
+
